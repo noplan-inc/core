@@ -4,6 +4,12 @@ import { Wallet } from '@ethersproject/wallet';
 import { MediaFactory } from '../typechain/MediaFactory';
 import Decimal from '../utils/Decimal';
 
+const chainEnvPath = {
+  1: '.prod',
+  4: '.dev',
+  97: '.bsc'
+}
+
 async function start() {
   const args = require('minimist')(process.argv.slice(2), {
     string: ['tokenURI', 'metadataURI', 'contentHash', 'metadataHash'],
@@ -16,9 +22,11 @@ async function start() {
     throw new Error('--tokenURI token URI is required');
   }
   if (!args.metadataURI) {
+    // メタデータはユニークじゃなくてもいいらしい
     throw new Error('--metadataURI metadata URI is required');
   }
   if (!args.contentHash) {
+    // これはユニークでないといけない
     throw new Error('--contentHash content hash is required');
   }
   if (!args.metadataHash) {
@@ -27,9 +35,7 @@ async function start() {
   if (!args.creatorShare && args.creatorShare !== 0) {
     throw new Error('--creatorShare creator share is required');
   }
-  const path = `${process.cwd()}/.env${
-    args.chainId === 1 ? '.prod' : args.chainId === 4 ? '.dev' : '.local'
-  }`;
+  const path = `${process.cwd()}/.env${chainEnvPath[args.chainId]}`;
   await require('dotenv').config({ path });
   const provider = new JsonRpcProvider(process.env.RPC_ENDPOINT);
   // const wallet = new Wallet(`0x${process.env.PRIVATE_KEY}`, provider);
