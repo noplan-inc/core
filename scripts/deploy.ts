@@ -4,15 +4,20 @@ import { Wallet } from '@ethersproject/wallet';
 import { MediaFactory } from '../typechain/MediaFactory';
 import { MarketFactory } from '../typechain/MarketFactory';
 
+const chainEnvPath = {
+  1: '.prod',
+  4: '.dev',
+  97: '.bsc'
+}
+
 async function start() {
   const args = require('minimist')(process.argv.slice(2));
 
   if (!args.chainId) {
     throw new Error('--chainId chain ID is required');
   }
-  const path = `${process.cwd()}/.env${
-    args.chainId === 1 ? '.prod' : args.chainId === 4 ? '.dev' : '.local'
-  }`;
+  const path = `${process.cwd()}/.env${chainEnvPath[args.chainId]}`;
+
   await require('dotenv').config({ path });
   const provider = new JsonRpcProvider(process.env.RPC_ENDPOINT);
   const wallet = new Wallet(`0x${process.env.PRIVATE_KEY}`, provider);
