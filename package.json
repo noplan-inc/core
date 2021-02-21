@@ -9,6 +9,11 @@
     "./dist/*"
   ],
   "scripts": {
+    "uploadIpfs": "ts-node scripts/uploadIpfs.ts",
+    "mint:zora": "ts-node scripts/mintByZora.ts --chainId 97",
+    "deploy:bsc-testnet": "ts-node scripts/deploy.ts --chainId 97",
+    "burn": "ts-node scripts/burn.ts --chainId 97",
+    "accept:bid": "ts-node scripts/acceptBid.ts --chainId 97",
     "deploy": "ts-node scripts/deploy.ts",
     "mint": "ts-node scripts/mint.ts",
     "mediaInfo": "ts-node scripts/mediaInfo.ts",
@@ -23,7 +28,9 @@
     "watch": "ts-node scripts/watch.ts"
   },
   "dependencies": {
-    "ethers": "^5.0.19"
+    "@zoralabs/zdk": "^1.0.4",
+    "ethers": "^5.0.19",
+    "ipfs": "^0.54.2"
   },
   "devDependencies": {
     "@ethersproject/keccak256": "^5.0.6",
