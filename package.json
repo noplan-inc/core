@@ -23,6 +23,7 @@
     "watch": "ts-node scripts/watch.ts"
   },
   "dependencies": {
+    "@eth-optimism/plugins": "^0.0.20",
     "ethers": "^5.0.19"
   },
   "devDependencies": {
