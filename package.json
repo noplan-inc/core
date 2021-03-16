@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@eth-optimism/plugins": "^0.0.20",
+    "@zoralabs/zdk": "^1.0.7",
     "ethers": "^5.0.19"
   },
   "devDependencies": {
@@ -55,6 +56,7 @@
     "hardhat-deploy": "^0.7.0-beta.25",
     "hardhat-typechain": "^0.3.3",
     "husky": ">=4",
+    "ipfs": "^0.54.4",
     "lint-staged": ">=10",
     "minimist": "^1.2.5",
     "prettier": "^2.1.2",
