@@ -7,8 +7,8 @@ import { MarketFactory } from '../typechain/MarketFactory';
 const chainId = {
   1: '.prod',
   4: '.dev',
-  420: '.optimism'
-}
+  420: '.optimism',
+};
 
 async function start() {
   const args = require('minimist')(process.argv.slice(2));
@@ -25,12 +25,12 @@ async function start() {
   const addressBook = JSON.parse(await fs.readFileSync(sharedAddressPath));
   if (addressBook.market) {
     throw new Error(
-      `market already exists in address book at ${sharedAddressPath}. Please move it first so it is not overwritten`
+      `market already exists in address book at ${sharedAddressPath}. Please move it first so it is not overwritten`,
     );
   }
   if (addressBook.media) {
     throw new Error(
-      `media already exists in address book at ${sharedAddressPath}. Please move it first so it is not overwritten`
+      `media already exists in address book at ${sharedAddressPath}. Please move it first so it is not overwritten`,
     );
   }
 
@@ -43,7 +43,7 @@ async function start() {
 
   console.log('Deploying Media...');
   const mediaDeployTx = await new MediaFactory(wallet).deploy(
-    addressBook.market
+    addressBook.market,
   );
   console.log(`Deploy TX: ${mediaDeployTx.deployTransaction.hash}`);
   await mediaDeployTx.deployed();
