@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity 0.6.8;
+pragma solidity >0.6.0 <0.8.0;
 pragma experimental ABIEncoderV2;
 
 import {ERC721Burnable} from "./ERC721Burnable.sol";
@@ -24,6 +24,8 @@ import "./interfaces/IMedia.sol";
 contract Media is IMedia, ERC721Burnable, ReentrancyGuard {
     using Counters for Counters.Counter;
     using SafeMath for uint256;
+    using EnumerableSet for EnumerableSet.UintSet;
+
 
     /* *******
      * Globals
@@ -487,6 +489,7 @@ contract Media is IMedia, ERC721Burnable, ReentrancyGuard {
         _setTokenMetadataHash(tokenId, data.metadataHash);
         _setTokenMetadataURI(tokenId, data.metadataURI);
         _setTokenURI(tokenId, data.tokenURI);
+//        TODO fix them
         _creatorTokens[creator].add(tokenId);
         _contentHashes[data.contentHash] = true;
 
